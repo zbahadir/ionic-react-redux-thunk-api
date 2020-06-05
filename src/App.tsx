@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -23,8 +23,44 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App: React.FC = () => (
-  <IonApp>
+import {RootProps, rootConnector} from './store/thunks/index.thunks';
+
+
+import {Plugins} from '@capacitor/core';
+const {SplashScreen} = Plugins;
+
+const App: React.FC<RootProps> = (props: RootProps) => {
+
+  async function init() {
+    // Init theme first
+    await props.initTheme();
+
+    await SplashScreen.hide();
+
+    /*
+    // Init data
+    const promises = [];
+    promises.push(props.initClients());
+    promises.push(props.initActiveProjects());
+    promises.push(props.initTask());
+    promises.push(props.computeSummary());
+    promises.push(props.listTasks(new Date()));
+    promises.push(props.listProjectsInvoices());
+    promises.push(props.initSettings());
+    await Promise.all(promises);
+    */
+  }
+
+  useEffect(() => {
+    init();
+    //initSelectedTab();
+    //setBackup(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+  return (
+    <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/home" component={Home} exact={true} />
@@ -32,6 +68,10 @@ const App: React.FC = () => (
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+    )
+// const App: React.FC = () => (
 
-export default App;
+};
+
+//export default App;
+export default rootConnector(App);

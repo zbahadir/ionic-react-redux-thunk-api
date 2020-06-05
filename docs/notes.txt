@@ -1,0 +1,13 @@
+npm install redux --save
+npm install redux-devtools-extension --save
+npm install redux-thunk --save
+npm install react-redux --save 
+
+npm install axios --save
+npm install jwt-decode --save
+
+npm install @types/jwt-decode
+npm install @types/react-redux
+
+npm install node-sass
+npm install idb-keyval
