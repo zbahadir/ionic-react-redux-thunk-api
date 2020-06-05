@@ -1,0 +1,7 @@
+{
+  "name": "ionic-react-redux-thunk-api",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
