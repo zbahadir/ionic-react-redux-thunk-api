@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonToggle, IonList, IonSelect, IonSelectOption } from '@ionic/react';
-import React, { Suspense,useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import './Home.css';
 
 import { useSelector } from 'react-redux';

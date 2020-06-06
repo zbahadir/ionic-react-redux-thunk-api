@@ -1,7 +1,7 @@
 import {get, set} from 'idb-keyval';
 
-import { Plugins } from '@capacitor/core';
-const { Storage } = Plugins;
+//import { Plugins } from '@capacitor/core';
+//const { Storage } = Plugins;
 
 export class ThemeService {
   private static instance: ThemeService;

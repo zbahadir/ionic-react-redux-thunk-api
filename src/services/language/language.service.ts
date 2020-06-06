@@ -1,8 +1,7 @@
 import {get, set} from 'idb-keyval';
 // import {Language, LanguageData} from '../../models/language';
-
-import { Plugins } from '@capacitor/core';
-const { Storage } = Plugins;
+// import { Plugins } from '@capacitor/core';
+// const { Storage } = Plugins;
 
 export class LanguageService {
   private static instance: LanguageService;

@@ -1,12 +1,10 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonToggle, IonList, IonSelect, IonSelectOption } from '@ionic/react';
-import React, { Suspense,useEffect, useState } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonList, IonSelect, IonSelectOption } from '@ionic/react';
+import React, { Suspense } from 'react';
 import './Home.css';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducers';
 import { rootConnector } from '../store/thunks/index.thunks';
-
-import {Settings as SettingsModel} from '../models/settings';
 
 export interface HomeGeneralProps {
     updateSettings: Function;
@@ -17,23 +15,6 @@ const Settings: React.FC<HomeGeneralProps> = (props) => {
    const settings: any | undefined = useSelector((state: RootState) => { 
     return state.settings.settings; 
   });
-
-  // const Language: string = useSelector((state: RootState) => state.language.lang);
-  // const Language: string | undefined = useSelector((state: RootState) => state.language.lang);
- 
-  // const AllSet: Settings = useSelector((state: RootState) => state.settings.settings  );
-
-
-  /*
-  const Set1: any | undefined = useSelector((state: RootState) => { 
-    return state.settings.settings; 
-  });  
-
-  const Set2: any | undefined = useSelector((state: RootState) => { 
-    return state.settings.settings; 
-  });  
-*/
-
 
   return (
   <Suspense fallback="loading">
