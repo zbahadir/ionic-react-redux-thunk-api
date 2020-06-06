@@ -1,5 +1,8 @@
 import {get, set} from 'idb-keyval';
 
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
+
 export class ThemeService {
   private static instance: ThemeService;
   private darkTheme: boolean | undefined = undefined;
@@ -28,21 +31,18 @@ export class ThemeService {
     try {
       await set('dark_mode', dark);
     } catch (err) {
-      // We ignore this error. In worst case scenario, the application will be displayed in another theme after next refresh.
+      console.log('err:', err);      
     }
   }
 
   async switchTheme(): Promise<boolean | undefined> {
-    //console.log('Service switchTheme');
     await this.switch(!this.darkTheme);
     return this.darkTheme;
   }
 
   async initDarkModePreference(): Promise<boolean> {
-    try {
-      const savedDarkModePreference: boolean = await get('dark_mode');
-
-      // If user already specified once a preference, we use that as default
+     try {
+      const savedDarkModePreference: boolean = await get('dark_mode');      
       if (savedDarkModePreference !== undefined) {
         this.switch(savedDarkModePreference);
         return savedDarkModePreference;
@@ -52,10 +52,11 @@ export class ThemeService {
       return false;
     }
 
-    // Otherwise we check the prefers-color-scheme of the OS
     const darkModePreferenceFromMedia: MediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
-
     this.switch(darkModePreferenceFromMedia.matches);
-    return darkModePreferenceFromMedia.matches;
+    return darkModePreferenceFromMedia.matches;    
+
   }
+
+
 }

@@ -34,7 +34,7 @@ const App: React.FC<RootProps> = (props: RootProps) => {
   async function init() {
     // Init theme first
     await props.initTheme();
-
+    await props.initLanguage();
     await SplashScreen.hide();
 
     /*

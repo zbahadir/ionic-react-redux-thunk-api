@@ -1,8 +1,6 @@
 import {INIT_THEME, SWITCH_THEME, ThemeActionTypes} from '../types/theme.types';
 
 export function switchTheme(dark: boolean): ThemeActionTypes {
-  console.log('Action |switchTheme', dark);
-  
   return {
     type: SWITCH_THEME,
     payload: dark,

@@ -10,8 +10,6 @@ const initialState: ThemeState = {
 
 export function themeReducer(state = initialState, action: ThemeActionTypes): ThemeState {
   
-  console.log('themeReducer');
-
   switch (action.type) {
     case INIT_THEME:
     case SWITCH_THEME:
