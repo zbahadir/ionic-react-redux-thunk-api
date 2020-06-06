@@ -3,6 +3,8 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
+import Settings from './pages/Settings';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -35,6 +37,7 @@ const App: React.FC<RootProps> = (props: RootProps) => {
     // Init theme first
     await props.initTheme();
     await props.initLanguage();
+    await props.initSettings();
     await SplashScreen.hide();
 
     /*
@@ -64,6 +67,8 @@ const App: React.FC<RootProps> = (props: RootProps) => {
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/home" component={Home} exact={true} />
+        <Route path="/settings" component={Settings} exact={true} />
+
         <Route exact path="/" render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
     </IonReactRouter>

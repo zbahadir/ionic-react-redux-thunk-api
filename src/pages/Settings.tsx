@@ -6,43 +6,35 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducers';
 import { rootConnector } from '../store/thunks/index.thunks';
 
+import {Settings as SettingsModel} from '../models/settings';
+
 export interface HomeGeneralProps {
-  switchTheme: Function;
-  setLanguage: Function;
+    updateSettings: Function;
 }
 
-const Home: React.FC<HomeGeneralProps> = (props) => {
-  
-  const darkTheme: boolean | undefined = useSelector((state: RootState) => {
-    return state.theme.dark; 
-  });  
-  
-
-  const Language: string | undefined = useSelector((state: RootState) => { 
-    return state.language.lang; 
-  });  
-  
+const Settings: React.FC<HomeGeneralProps> = (props) => {
+   
+   const settings: any | undefined = useSelector((state: RootState) => { 
+    return state.settings.settings; 
+  });
 
   // const Language: string = useSelector((state: RootState) => state.language.lang);
   // const Language: string | undefined = useSelector((state: RootState) => state.language.lang);
-  //const [Language, setLanguage] = useState('');
+ 
+  // const AllSet: Settings = useSelector((state: RootState) => state.settings.settings  );
 
 
   /*
-    const Language: string = useSelector((state: RootState) => { 
-      return state.language.lang; 
-    }); 
-   async function changeLanuage(lang: any) {       
-     await props.setLanguage(lang);
-   }
-  async function toggleTheme() {    
-    await props.switchTheme();
-  }
-  
+  const Set1: any | undefined = useSelector((state: RootState) => { 
+    return state.settings.settings; 
+  });  
 
-value={Language}
+  const Set2: any | undefined = useSelector((state: RootState) => { 
+    return state.settings.settings; 
+  });  
+*/
 
-  */
+
   return (
   <Suspense fallback="loading">
     <IonPage>
@@ -53,15 +45,17 @@ value={Language}
       </IonHeader>
       <IonContent className="ion-padding">
         <IonList>
-          <IonItem className="item-input item-radio with-padding">
-            <IonLabel>
-              {darkTheme ? "Dark" : "Light" } {darkTheme ? '🌑' : '☀️'}
-            </IonLabel>
-            <IonToggle slot="end" checked={darkTheme} mode="md" color="medium" onClick={() => props.switchTheme()}></IonToggle>
+        <IonItem>
+            <IonLabel position="stacked">Theme</IonLabel>
+            <IonSelect value={settings.theme} okText="Okay" cancelText="Dismiss" onIonChange={e => props.updateSettings('theme:'+e.detail.value)}>
+            <IonSelectOption value="dark">Dark</IonSelectOption>
+            <IonSelectOption value="light">Light</IonSelectOption>
+            <IonSelectOption value="default">Default</IonSelectOption>
+            </IonSelect>
           </IonItem>
           <IonItem>
             <IonLabel position="stacked">Language</IonLabel>
-            <IonSelect value={Language} okText="Okay" cancelText="Dismiss" onIonChange={e => props.setLanguage(e.detail.value)}>
+            <IonSelect value={settings.language} okText="Okay" cancelText="Dismiss" onIonChange={e => props.updateSettings('language:'+e.detail.value)}>
             <IonSelectOption value="en">English</IonSelectOption>
             <IonSelectOption value="tr">Turkish</IonSelectOption>
             <IonSelectOption value="fr">French</IonSelectOption>
@@ -74,4 +68,4 @@ value={Language}
   );
 };
 
-export default rootConnector(Home);
+export default rootConnector(Settings);

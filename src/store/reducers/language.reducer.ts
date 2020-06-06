@@ -1,5 +1,4 @@
 import {INIT_LANGUAGE, SWITCH_LANGUAGE, LanguageActionTypes} from '../types/language.types';
-// import {LanguageService} from '../../services/language/language.service';
 
 export interface LanguageState {
   lang: any;
@@ -7,7 +6,7 @@ export interface LanguageState {
 
 
 const initialState: LanguageState = {
-    lang: undefined,
+  lang: undefined,
 };
 
 export function languageReducer(state = initialState, action: LanguageActionTypes): LanguageState {
