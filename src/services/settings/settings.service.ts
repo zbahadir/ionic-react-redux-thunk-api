@@ -39,8 +39,7 @@ export class SettingsService {
         resolve(this.getDefaultSettings());
       }          
     });    
-  }
-   
+  }   
   
   async toupdate(key: any, value: any) {        
     try {
