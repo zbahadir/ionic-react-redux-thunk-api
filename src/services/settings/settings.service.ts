@@ -31,11 +31,12 @@ export class SettingsService {
     return new Promise<any>(async (resolve) => {
       try {        
         let testset = await get('settings');
-        if(!testset) {
+        if(testset===undefined) {
           resolve(this.settings);
-        } else {
+        } else {          
           this.settings = await get('settings');
-        }
+          resolve(this.settings);
+        }        
       } catch (err) {
         console.log('M2');
         resolve(this.settings);
