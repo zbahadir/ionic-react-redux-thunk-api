@@ -1,33 +1,21 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonToggle, IonList, IonSelect, IonSelectOption } from '@ionic/react';
-import React, { useEffect } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/react';
+import React from 'react';
 import './Home.css';
-import {get, set} from 'idb-keyval';
 
-const Test: React.FC = () => {  
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducers';
+import { rootConnector } from '../store/thunks/index.thunks';
 
-  let dizi = {
-      name: 'Zafer',
-      surname: "BAHADIR",
-      country: "Tükiye"
-  } 
-    
-  async function test() {
-    await set('dizi', JSON.stringify(dizi));
-  }
+export interface HomeGeneralProps {
+    updateSettings: Function;
+}
 
-  async function testget() {
-      const newdizi: string = await get("dizi");
-      console.log('newdizi: ', JSON.parse(newdizi).name);
-      
-  }
 
-  useEffect(() => {
-    test();
-    testget();
-    //initSelectedTab();
-    //setBackup(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const Test: React.FC<HomeGeneralProps> = (props) => {  
+
+    const settings: any | undefined = useSelector((state: RootState) => { 
+        return state.settings.settings; 
+      });
 
   return (
     <IonPage>
@@ -37,10 +25,17 @@ const Test: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-
+      <IonItem>
+            <IonLabel position="stacked">Language</IonLabel>
+            <IonSelect value={settings.language} okText="Okay" cancelText="Dismiss" onIonChange={e => props.updateSettings('language:'+e.detail.value)}>
+            <IonSelectOption value="en">English</IonSelectOption>
+            <IonSelectOption value="tr">Turkish</IonSelectOption>
+            <IonSelectOption value="fr">French</IonSelectOption>
+            </IonSelect>
+          </IonItem>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Test
+export default rootConnector(Test);

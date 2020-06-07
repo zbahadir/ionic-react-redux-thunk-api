@@ -4,9 +4,6 @@ import {Settings} from '../../models/settings';
 
 export class SettingsService {
   private static instance: SettingsService;
-  private key: string | undefined = undefined;
-  private value: string | undefined = undefined;
-  private data: any;  
   private constructor() {
     // Private constructor, singleton
   }
