@@ -30,10 +30,15 @@ export class SettingsService {
   init(): Promise<Settings> {
     return new Promise<any>(async (resolve) => {
       try {        
-        this.settings = await get('settings');
-        resolve(this.settings);
+        let testset = await get('settings');
+        if(!testset) {
+          resolve(this.settings);
+        } else {
+          this.settings = await get('settings');
+        }
       } catch (err) {
-        resolve(this.getDefaultSettings());
+        console.log('M2');
+        resolve(this.settings);
       }          
     });    
   }   
